@@ -5,6 +5,7 @@ RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
+    apt-utils \
     curl \
     jq \
     git \
@@ -16,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     netcat \
     libssl1.0 \
     python3.8 \
-    && rm -rf /var/lib/apt/lists/* && alias python=python3
+    && rm -rf /var/lib/apt/lists/* && echo 'alias python="python3"' >> ~/.bashrc
 
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg &&\
     echo \
